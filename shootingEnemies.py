@@ -49,7 +49,7 @@ class MyGame(arcade.Window):
         self.player_sprite.center_x = 64
         self.player_sprite.center_y = 128
         self.player_list.append(self.player_sprite)
-        map_name = "Maps\Map 1.tmx"
+        map_name = "Maps\Map_1.tmx"
         wall_layer_name = "ThunderCloud"
         enemy_layer_name = "EnemyPlane"
         my_map = arcade.tilemap.read_tmx(map_name)
