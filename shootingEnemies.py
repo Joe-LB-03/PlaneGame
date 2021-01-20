@@ -117,6 +117,12 @@ class MyGame(arcade.Window):
 
             if self.frame_count % 60 == 0:
                 bullet = arcade.Sprite("Sprites\Player\Bullet.png")
+                bullet.center_x = start_x
+                bullet.center_y = start_y
+                bullet.angle = math.degrees(angle)
+                bullet.change_x = math.cos(angle) * BULLET_SPEED
+                bullet.change_y = math.sin(angle) * BULLET_SPEED
+                self.bullet_list.append(bullet)
 
 def main():
     window = MyGame()
