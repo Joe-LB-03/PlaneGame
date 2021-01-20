@@ -12,7 +12,7 @@ import os
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 SCREEN_TITLE = "Sprites and Bullets Enemy Aims Example"
-BULLET_SPEED = 35
+BULLET_SPEED = 4
 
 
 class MyGame(arcade.Window):
@@ -43,18 +43,18 @@ class MyGame(arcade.Window):
         self.player_list = arcade.SpriteList()
 
         # Add player ship
-        self.player = arcade.Sprite("Sprites\Player\player_0.png", 0.5)
+        self.player = arcade.Sprite(":resources:images/space_shooter/playerShip1_orange.png", 0.5)
         self.player_list.append(self.player)
 
         # Add top-left enemy ship
-        enemy = arcade.Sprite("Sprites\Enemy\enemy_0.png", 0.5)
+        enemy = arcade.Sprite(":resources:images/space_shooter/playerShip1_green.png", 0.5)
         enemy.center_x = 120
         enemy.center_y = SCREEN_HEIGHT - enemy.height
         enemy.angle = 180
         self.enemy_list.append(enemy)
 
         # Add top-right enemy ship
-        enemy = arcade.Sprite("Sprites\Enemy\enemy_0.png", 0.5)
+        enemy = arcade.Sprite(":resources:images/space_shooter/playerShip1_green.png", 0.5)
         enemy.center_x = SCREEN_WIDTH - 120
         enemy.center_y = SCREEN_HEIGHT - enemy.height
         enemy.angle = 180
@@ -102,7 +102,7 @@ class MyGame(arcade.Window):
 
             # Shoot every 60 frames change of shooting each frame
             if self.frame_count % 60 == 0:
-                bullet = arcade.Sprite("Sprites\Bullet\Bullet in Paint 3D.png")
+                bullet = arcade.Sprite(":resources:images/space_shooter/laserBlue01.png")
                 bullet.center_x = start_x
                 bullet.center_y = start_y
 
