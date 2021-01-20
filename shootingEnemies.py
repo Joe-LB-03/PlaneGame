@@ -19,7 +19,6 @@ GRID_PIXEL_SIZE = 64
  
 BULLET_SPEED = 1
  
- 
 class MyGame(arcade.Window):
  
     def __init__(self):
