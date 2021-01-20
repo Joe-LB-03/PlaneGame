@@ -17,7 +17,7 @@ BOTTOM_VIEWPORT_MARGIN = 50
  
 GRID_PIXEL_SIZE = 64
  
-BULLET_SPEED = 0.1
+BULLET_SPEED = 1
  
  
 class MyGame(arcade.Window):
