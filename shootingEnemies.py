@@ -27,13 +27,11 @@ class MyGame(arcade.Window):
         self.wall_list = None
         self.player_list = None
         self.bullet_list = None
- 
         self.player_sprite = None
- 
+        self.thunder_list = None
+
         self.physics_engine = None
- 
         self.view_bottom = 0
- 
         self.frame_count = 0
  
         arcade.set_background_color(arcade.csscolor.CORNFLOWER_BLUE)
@@ -43,19 +41,21 @@ class MyGame(arcade.Window):
         self.wall_list = arcade.SpriteList(use_spatial_hash=True)
         self.plane_list = arcade.SpriteList(use_spatial_hash=True)
         self.bullet_list = arcade.SpriteList()
+        self.thunder_list = arcade.SpriteList(use_spatial_hash = True)
  
         self.player_sprite = arcade.Sprite("Sprites\Player\player_0.png", CHARACTER_SCALING)
         self.player_sprite.center_x = 64
         self.player_sprite.center_y = 128
         self.player_list.append(self.player_sprite)
         map_name = "Maps\Map_1.tmx"
-        wall_layer_name = "ThunderCloud"
+        wall_layer_name = "Cloud"
         enemy_layer_name = "EnemyPlane"
+        thunder_layer_name = "ThunderCloud"
         my_map = arcade.tilemap.read_tmx(map_name)
-        self.wall_list = arcade.tilemap.process_layer(map_object=my_map, layer_name=wall_layer_name,
-                                                      scaling=TILE_SCALING * 2.25, use_spatial_hash=True)
+        self.wall_list = arcade.tilemap.process_layer(map_object=my_map, layer_name=wall_layer_name, scaling=TILE_SCALING * 2.25, use_spatial_hash=True)
         self.plane_list = arcade.tilemap.process_layer(my_map, enemy_layer_name, TILE_SCALING * 2.25)
         self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite, self.wall_list)
+        self.thunder_list = arcade.tilemap.process_layer(my_map,thunder_layer_name,TILE_SCALING * 2.25, use_spatial_hash=True)
  
     def on_draw(self):
         arcade.start_render()
@@ -64,6 +64,7 @@ class MyGame(arcade.Window):
         self.player_list.draw()
         self.plane_list.draw()
         self.bullet_list.draw()
+        self.thunder_list.draw()
  
     def on_key_press(self, key, modifiers):
         if key == arcade.key.UP or key == arcade.key.W or key == arcade.key.SPACE:
