@@ -18,6 +18,9 @@ BOTTOM_VIEWPORT_MARGIN = 50
 GRID_PIXEL_SIZE = 64
  
 BULLET_SPEED = 1
+
+player_start_x = 64
+player_start_y = 128
  
 class MyGame(arcade.Window):
  
@@ -44,8 +47,9 @@ class MyGame(arcade.Window):
         self.thunder_list = arcade.SpriteList(use_spatial_hash = True)
  
         self.player_sprite = arcade.Sprite("Sprites\Player\player_0.png", CHARACTER_SCALING)
-        self.player_sprite.center_x = 64
-        self.player_sprite.center_y = 128
+        
+        self.player_sprite.center_x = player_start_x
+        self.player_sprite.center_y = player_start_y
         self.player_list.append(self.player_sprite)
         map_name = "Maps\Map_1.tmx"
         wall_layer_name = "Cloud"
@@ -90,6 +94,15 @@ class MyGame(arcade.Window):
         self.frame_count +=1
         self.physics_engine.update()
         changed = False
+
+        if arcade.check_for_collision_with_list(self.player_sprite,self.thunder_list) or arcade.check_for_collision_with_list(self.player_sprite, self.bullet_list):
+            self.player_sprite.change_x = 0
+            self.player_sprite.change_y = 0
+            self.player_sprite.center_x = player_start_x
+            self.player_sprite.center_y = player_start_y
+            self.view_bottom = 0
+            changed = True
+
         top_boundary = self.view_bottom + SCREEN_HEIGHT - TOP_VIEWPORT_MARGIN
         if self.player_sprite.top > top_boundary:
             self.view_bottom += self.player_sprite.top - top_boundary
@@ -113,8 +126,9 @@ class MyGame(arcade.Window):
  
             x_diff = dest_x - start_x
             y_diff = dest_y - start_y
+            
 
-            if math.sqrt((x_diff*x_diff)+(y_diff*y_diff)) < 600:
+            if math.sqrt((x_diff*x_diff)+(y_diff*y_diff)) < 700:
                 angle = math.atan2(y_diff, x_diff)
     
                 enemy.angle = math.degrees(angle) + 90
@@ -131,7 +145,7 @@ class MyGame(arcade.Window):
                     self.bullet_list.append(bullet)
     
             for bullet in self.bullet_list:
-                if bullet.top < 0:
+                if math.sqrt(((self.player_sprite.center_x - bullet.center_x)*(self.player_sprite.center_x - bullet.center_x))+((self.player_sprite.center_y - bullet.center_y)*(self.player_sprite.center_y - bullet.center_y))) > 800:
                     bullet.remove_from_sprite_lists()
     
             
