@@ -3,7 +3,7 @@ import math
 import os
  
 # Constants
-SCREEN_WIDTH = 1200
+SCREEN_WIDTH = 1152
 SCREEN_HEIGHT = 700
 SCREEN_TITLE = "FILLERNAME"
  
@@ -19,7 +19,7 @@ GRID_PIXEL_SIZE = 64
  
 BULLET_SPEED = 0.8
 
-player_start_x = 64
+player_start_x = 576
 player_start_y = 128
  
 class MyGame(arcade.Window):
