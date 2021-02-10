@@ -157,6 +157,12 @@ class MyGame(arcade.Window):
         for bullet in self.bullet_list:
             if math.sqrt(((self.player_sprite.center_x - bullet.center_x)*(self.player_sprite.center_x - bullet.center_x))+((self.player_sprite.center_y - bullet.center_y)*(self.player_sprite.center_y - bullet.center_y))) > 800:
                 bullet.remove_from_sprite_lists()
+            
+            hit_list = arcade.check_for_collision_with_list(bullet, self.thunder_list)
+            if len(hit_list) > 0:
+                bullet.remove_from_sprite_lists()
+            for thunder in hit_list:
+                thunder.remove_from_sprite_lists()
     
             
         self.bullet_list.update()
