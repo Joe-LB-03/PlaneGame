@@ -12,7 +12,7 @@ TILE_SCALING = 0.5
  
 PLAYER_MOVEMENT_SPEED = 4.5
  
-TOP_VIEWPORT_MARGIN = 100
+TOP_VIEWPORT_MARGIN = 250
 BOTTOM_VIEWPORT_MARGIN = 50
  
 GRID_PIXEL_SIZE = 64
@@ -149,8 +149,8 @@ class MyGame(arcade.Window):
                     bullet.center_y = start_y
                     bullet.angle = math.degrees(angle) - 90
 
-                    bullet.change_x = math.cos(angle) * BULLET_SPEED
-                    bullet.change_y = math.sin(angle) * BULLET_SPEED
+                    bullet.change_x = math.cos(angle) * BULLET_SPEED*5
+                    bullet.change_y = math.sin(angle) * BULLET_SPEED*5
 
                     self.bullet_list.append(bullet)
     
@@ -159,7 +159,7 @@ class MyGame(arcade.Window):
                 bullet.remove_from_sprite_lists()
     
             
-            self.bullet_list.update()
+        self.bullet_list.update()
 
         self.player_bullet_list.update()
         for player_bullet in self.player_bullet_list:
