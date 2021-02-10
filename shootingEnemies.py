@@ -30,6 +30,7 @@ class MyGame(arcade.Window):
         self.wall_list = None
         self.player_list = None
         self.bullet_list = None
+        self.player_bullet_list = None
         self.player_sprite = None
         self.thunder_list = None
 
@@ -44,6 +45,7 @@ class MyGame(arcade.Window):
         self.wall_list = arcade.SpriteList(use_spatial_hash=True)
         self.plane_list = arcade.SpriteList(use_spatial_hash=True)
         self.bullet_list = arcade.SpriteList()
+        self.player_bullet_list = arcade.SpriteList()
         self.thunder_list = arcade.SpriteList(use_spatial_hash = True)
  
         self.player_sprite = arcade.Sprite("Sprites\Player\player_0.png", CHARACTER_SCALING)
@@ -68,6 +70,7 @@ class MyGame(arcade.Window):
         self.player_list.draw()
         self.plane_list.draw()
         self.bullet_list.draw()
+        self.player_bullet_list.draw()
         self.thunder_list.draw()
  
     def on_key_press(self, key, modifiers):
@@ -90,6 +93,13 @@ class MyGame(arcade.Window):
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player_sprite.change_x = 0
  
+    def on_mouse_press(self, x, y, button, modifiers):
+        player_bullet = arcade.Sprite("Sprites\Bullet\Bullet.png")
+        player_bullet.change_y = BULLET_SPEED
+        player_bullet.center_x = self.player_sprite.center_x
+        player_bullet.bottom = self.player_sprite.top
+        self.player_bullet_list.append(player_bullet)
+
     def on_update(self, delta_time):
         self.frame_count +=1
         self.physics_engine.update()
@@ -150,6 +160,16 @@ class MyGame(arcade.Window):
     
             
             self.bullet_list.update()
+
+        self.player_bullet_list.update()
+        for player_bullet in self.player_bullet_list:
+            hit_list = arcade.check_for_collision_with_list(player_bullet, self.plane_list)
+            if len(hit_list) > 0:
+                player_bullet.remove_from_sprite_lists()
+
+            for plane in hit_list:
+                plane.remove_from_sprite_lists()
+            
  
  
 def main():
