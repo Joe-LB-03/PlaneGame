@@ -94,8 +94,8 @@ class MyGame(arcade.Window):
             self.player_sprite.change_x = 0
  
     def on_mouse_press(self, x, y, button, modifiers):
-        player_bullet = arcade.Sprite("Sprites\Bullet\Bullet.png")
-        player_bullet.change_y = BULLET_SPEED
+        player_bullet = arcade.Sprite("Sprites\Bullet\Player_Bullet.png")
+        player_bullet.change_y = BULLET_SPEED*5
         player_bullet.center_x = self.player_sprite.center_x
         player_bullet.bottom = self.player_sprite.top
         self.player_bullet_list.append(player_bullet)
@@ -143,7 +143,7 @@ class MyGame(arcade.Window):
     
                 enemy.angle = math.degrees(angle) + 90
     
-                if self.frame_count % 60 == 0:
+                if self.frame_count % 120 == 0:
                     bullet = arcade.Sprite("Sprites\Bullet\Bullet.png")
                     bullet.center_x = start_x
                     bullet.center_y = start_y
@@ -154,9 +154,9 @@ class MyGame(arcade.Window):
 
                     self.bullet_list.append(bullet)
     
-            for bullet in self.bullet_list:
-                if math.sqrt(((self.player_sprite.center_x - bullet.center_x)*(self.player_sprite.center_x - bullet.center_x))+((self.player_sprite.center_y - bullet.center_y)*(self.player_sprite.center_y - bullet.center_y))) > 800:
-                    bullet.remove_from_sprite_lists()
+        for bullet in self.bullet_list:
+            if math.sqrt(((self.player_sprite.center_x - bullet.center_x)*(self.player_sprite.center_x - bullet.center_x))+((self.player_sprite.center_y - bullet.center_y)*(self.player_sprite.center_y - bullet.center_y))) > 800:
+                bullet.remove_from_sprite_lists()
     
             
             self.bullet_list.update()
