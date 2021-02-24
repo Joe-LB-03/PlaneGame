@@ -125,6 +125,11 @@ class MyGame(arcade.Window):
             self.view_bottom = 0
             changed = True
 
+        clip_list = arcade.check_for_collision_with_list(self.player_sprite,self.ammo_list)
+        for clip in clip_list:
+            clip.remove_from_sprite_lists()
+            self.ammo_count += 1
+
 
         top_boundary = self.view_bottom + SCREEN_HEIGHT - TOP_VIEWPORT_MARGIN
         if self.player_sprite.top > top_boundary:
