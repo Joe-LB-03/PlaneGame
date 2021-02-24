@@ -102,13 +102,14 @@ class MyGame(arcade.Window):
             self.player_sprite.change_x = 0
  
     def on_mouse_press(self, x, y, button, modifiers):
-        if self.shoot_delay <= 0:
+        if self.shoot_delay <= 0 and self.ammo_count > 0:
             player_bullet = arcade.Sprite("Sprites\Bullet\Player_Bullet.png")
             player_bullet.change_y = BULLET_SPEED*5
             player_bullet.center_x = self.player_sprite.center_x
             player_bullet.bottom = self.player_sprite.top
             self.player_bullet_list.append(player_bullet)
             self.shoot_delay = 60
+            self.ammo_count -=1
 
     def on_update(self, delta_time):
         self.frame_count +=1
@@ -123,6 +124,7 @@ class MyGame(arcade.Window):
             self.player_sprite.center_y = player_start_y
             self.view_bottom = 0
             changed = True
+
 
         top_boundary = self.view_bottom + SCREEN_HEIGHT - TOP_VIEWPORT_MARGIN
         if self.player_sprite.top > top_boundary:
