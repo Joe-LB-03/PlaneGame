@@ -33,11 +33,13 @@ class MyGame(arcade.Window):
         self.player_bullet_list = None
         self.player_sprite = None
         self.thunder_list = None
+        self.ammo_list = None
 
         self.physics_engine = None
         self.view_bottom = 0
         self.frame_count = 0
         self.shoot_delay = 0
+        self.ammo_count = 3
  
         arcade.set_background_color(arcade.csscolor.CORNFLOWER_BLUE)
  
@@ -48,6 +50,7 @@ class MyGame(arcade.Window):
         self.bullet_list = arcade.SpriteList()
         self.player_bullet_list = arcade.SpriteList()
         self.thunder_list = arcade.SpriteList(use_spatial_hash = True)
+        self.ammo_list = arcade.SpriteList()
  
         self.player_sprite = arcade.Sprite("Sprites\Player\player_0.png", CHARACTER_SCALING)
         
@@ -58,21 +61,25 @@ class MyGame(arcade.Window):
         wall_layer_name = "Cloud"
         enemy_layer_name = "EnemyPlane"
         thunder_layer_name = "ThunderCloud"
+        ammo_layer_name = "Ammo"
         my_map = arcade.tilemap.read_tmx(map_name)
         self.wall_list = arcade.tilemap.process_layer(map_object=my_map, layer_name=wall_layer_name, scaling=TILE_SCALING * 2.25, use_spatial_hash=True)
         self.plane_list = arcade.tilemap.process_layer(my_map, enemy_layer_name, TILE_SCALING * 2.25)
         self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite, self.wall_list)
         self.thunder_list = arcade.tilemap.process_layer(my_map,thunder_layer_name,TILE_SCALING * 2.25, use_spatial_hash=True)
+        self.ammo_list = arcade.tilemap.process_layer(my_map,ammo_layer_name,TILE_SCALING*2.25)
  
     def on_draw(self):
         arcade.start_render()
         # Code to draw the screen goes here
+        self.ammo_list.draw()
         self.wall_list.draw()
         self.player_list.draw()
         self.plane_list.draw()
         self.bullet_list.draw()
         self.player_bullet_list.draw()
         self.thunder_list.draw()
+        
  
     def on_key_press(self, key, modifiers):
         if key == arcade.key.UP or key == arcade.key.W or key == arcade.key.SPACE:
