@@ -40,6 +40,7 @@ class MyGame(arcade.Window):
         self.frame_count = 0
         self.shoot_delay = 0
         self.ammo_count = 3
+        self.score = 0
  
         arcade.set_background_color(arcade.csscolor.CORNFLOWER_BLUE)
  
@@ -78,8 +79,8 @@ class MyGame(arcade.Window):
         self.plane_list.draw()
         self.bullet_list.draw()
         self.player_bullet_list.draw()
-        self.thunder_list.draw()
-        
+        self.thunder_list.draw()      
+        self.draw_bottom_hud()  
  
     def on_key_press(self, key, modifiers):
         if key == arcade.key.UP or key == arcade.key.W or key == arcade.key.SPACE:
@@ -111,6 +112,13 @@ class MyGame(arcade.Window):
             self.shoot_delay = 60
             self.ammo_count -=1
 
+    def draw_bottom_hud(self):
+        ammo_text = f"Ammo: {self.ammo_count}"
+        arcade.draw_text(ammo_text, 10, 10 + self.view_bottom, arcade.color.BLACK, 18)
+
+        score_text = f"Score: {self.score}"
+        arcade.draw_text(score_text, 1020, 10 + self.view_bottom, arcade.color.BLACK, 18)
+
     def on_update(self, delta_time):
         self.frame_count +=1
         self.shoot_delay -=1
@@ -124,6 +132,7 @@ class MyGame(arcade.Window):
             self.player_sprite.center_y = player_start_y
             self.view_bottom = 0
             changed = True
+            self.score = self.score - 50
 
         clip_list = arcade.check_for_collision_with_list(self.player_sprite,self.ammo_list)
         for clip in clip_list:
@@ -193,6 +202,7 @@ class MyGame(arcade.Window):
 
             for plane in hit_list:
                 plane.remove_from_sprite_lists()
+                self.score += 10
             
  
  
