@@ -17,7 +17,7 @@ BOTTOM_VIEWPORT_MARGIN = 50
  
 GRID_PIXEL_SIZE = 64
  
-BULLET_SPEED = 0.8
+BULLET_SPEED = 1
 
 player_start_x = 576
 player_start_y = 128
@@ -58,17 +58,7 @@ class MyGame(arcade.Window):
         self.player_sprite.center_x = player_start_x
         self.player_sprite.center_y = player_start_y
         self.player_list.append(self.player_sprite)
-        map_name = "Maps\Test_Map.tmx"
-        wall_layer_name = "Cloud"
-        enemy_layer_name = "EnemyPlane"
-        thunder_layer_name = "ThunderCloud"
-        ammo_layer_name = "Ammo"
-        my_map = arcade.tilemap.read_tmx(map_name)
-        self.wall_list = arcade.tilemap.process_layer(map_object=my_map, layer_name=wall_layer_name, scaling=TILE_SCALING * 2.25, use_spatial_hash=True)
-        self.plane_list = arcade.tilemap.process_layer(my_map, enemy_layer_name, TILE_SCALING * 2.25)
-        self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite, self.wall_list)
-        self.thunder_list = arcade.tilemap.process_layer(my_map,thunder_layer_name,TILE_SCALING * 2.25, use_spatial_hash=True)
-        self.ammo_list = arcade.tilemap.process_layer(my_map,ammo_layer_name,TILE_SCALING*2.25)
+        self.reset_map()
  
     def on_draw(self):
         arcade.start_render()
@@ -81,6 +71,19 @@ class MyGame(arcade.Window):
         self.player_bullet_list.draw()
         self.thunder_list.draw()      
         self.draw_bottom_hud()  
+    
+    def reset_map(self):
+        map_name = "Maps\Test_Map.tmx"
+        wall_layer_name = "Cloud"
+        enemy_layer_name = "EnemyPlane"
+        thunder_layer_name = "ThunderCloud"
+        ammo_layer_name = "Ammo"
+        my_map = arcade.tilemap.read_tmx(map_name)
+        self.wall_list = arcade.tilemap.process_layer(map_object=my_map, layer_name=wall_layer_name, scaling=TILE_SCALING * 2.25, use_spatial_hash=True)
+        self.plane_list = arcade.tilemap.process_layer(my_map, enemy_layer_name, TILE_SCALING * 2.25)
+        self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite, self.wall_list)
+        self.thunder_list = arcade.tilemap.process_layer(my_map,thunder_layer_name,TILE_SCALING * 2.25, use_spatial_hash=True)
+        self.ammo_list = arcade.tilemap.process_layer(my_map,ammo_layer_name,TILE_SCALING*2.25)
  
     def on_key_press(self, key, modifiers):
         if key == arcade.key.UP or key == arcade.key.W or key == arcade.key.SPACE:
@@ -132,7 +135,9 @@ class MyGame(arcade.Window):
             self.player_sprite.center_y = player_start_y
             self.view_bottom = 0
             changed = True
-            self.score = self.score - 50
+            self.ammo_count = 3
+            self.score = 0
+            self.reset_map()
 
         clip_list = arcade.check_for_collision_with_list(self.player_sprite,self.ammo_list)
         for clip in clip_list:
