@@ -42,7 +42,8 @@ class MyGame(arcade.Window):
         self.shoot_delay = 0
         self.ammo_count = 3
         self.score = 0
-        self.current_level = "Test_Map.tmx"
+        self.level = 1
+        self.current_level = "Map_1.tmx"
  
         arcade.set_background_color(arcade.csscolor.CORNFLOWER_BLUE)
  
@@ -152,8 +153,10 @@ class MyGame(arcade.Window):
             self.player_sprite.center_y = player_start_y
             self.view_bottom = 0
             changed = True
+            self.score += self.ammo_count*5
             self.ammo_count = 3
-            self.current_level = "Map_1.tmx"
+            self.level += 1
+            self.current_level = f"Map_{self.level}.tmx"
             self.reset_map(self.current_level)
 
         clip_list = arcade.check_for_collision_with_list(self.player_sprite,self.ammo_list)
