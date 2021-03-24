@@ -22,10 +22,10 @@ BULLET_SPEED = 1
 player_start_x = 576
 player_start_y = 128
  
-class MyGame(arcade.Window):
+class GameView(arcade.View):
  
     def __init__(self):
-        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
+        super().__init__()
  
         self.wall_list = None
         self.player_list = None
@@ -44,7 +44,7 @@ class MyGame(arcade.Window):
         self.score = 0
         self.level = 1
         self.current_level = "Map_1.tmx"
- 
+
         arcade.set_background_color(arcade.csscolor.CORNFLOWER_BLUE)
  
     def setup(self):
@@ -228,15 +228,11 @@ class MyGame(arcade.Window):
             for plane in hit_list:
                 plane.remove_from_sprite_lists()
                 self.score += 10
-            
- 
- 
+
 def main():
-    window = MyGame()
-    window.setup()
+    window = arcade.Window(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
+    start_view = GameView()
     arcade.run()
- 
  
 if __name__ == "__main__":
     main()
- 
