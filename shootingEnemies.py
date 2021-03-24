@@ -21,6 +21,20 @@ BULLET_SPEED = 1
 
 player_start_x = 576
 player_start_y = 128
+
+class TitleView(arcade.View):
+    def on_show(self):
+        arcade.set_background_color(arcade.color.CORNFLOWER_BLUE)
+        arcade.set_viewport(0, SCREEN_WIDTH-1, 0, SCREEN_HEIGHT-1)
+    
+    def on_draw(self):
+        arcade.start_render()
+        arcade.draw_text(SCREEN_TITLE, SCREEN_WIDTH/2, SCREEN_HEIGHT/2, arcade.color.BLACK, font_size=50, anchor_x="center")
+    
+    def on_mouse_press(self, x, y, button, modifiers):
+        game_view = GameView()
+        game_view.setup()
+        self.window.show_view(game_view)
  
 class GameView(arcade.View):
  
@@ -231,9 +245,8 @@ class GameView(arcade.View):
 
 def main():
     window = arcade.Window(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
-    start_view = GameView()
+    start_view = TitleView()
     window.show_view(start_view)
-    start_view.setup()
     arcade.run()
  
 if __name__ == "__main__":
