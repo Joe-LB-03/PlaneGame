@@ -69,22 +69,22 @@
    <image width="64" height="64" source="../Sprites/Cloud/Cloud14.png"/>
   </tile>
   <tile id="22">
-   <image width="64" height="64" source="../../../Downloads/Left_Border-1.png"/>
+   <image width="64" height="64" source="../Sprites/Cloud/Left_Border-1.png"/>
   </tile>
   <tile id="23">
-   <image width="64" height="64" source="../../../Downloads/Right_Border-1.png"/>
+   <image width="64" height="64" source="../Sprites/Cloud/Right_Border-1.png"/>
   </tile>
   <tile id="24">
-   <image width="64" height="64" source="../../../Downloads/Bottom_Border-1.png"/>
+   <image width="64" height="64" source="../Sprites/Cloud/Bottom_Border-1.png"/>
   </tile>
   <tile id="25">
-   <image width="64" height="64" source="../../../Downloads/Top_Border-1.png"/>
+   <image width="64" height="64" source="../Sprites/Cloud/Top_Border-1.png"/>
   </tile>
   <tile id="26">
-   <image width="64" height="64" source="../../../Downloads/Bottom_Right-1.png"/>
+   <image width="64" height="64" source="../Sprites/Cloud/Bottom_Right-1.png"/>
   </tile>
   <tile id="27">
-   <image width="64" height="64" source="../../../Downloads/Bottom_Left-1.png"/>
+   <image width="64" height="64" source="../Sprites/Cloud/Bottom_Left-1.png"/>
   </tile>
   <tile id="28">
    <image width="64" height="64" source="../Sprites/Bullet/Ammo_Clip.png"/>
